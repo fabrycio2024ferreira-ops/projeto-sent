@@ -1,0 +1,2031 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Alta Médica | Sentinela</title>
+
+  <!-- jsPDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --primary: #1769e0;
+      --primary-dark: #0d47a1;
+      --primary-light: #eef5ff;
+
+      --success: #16865a;
+      --success-dark: #106b47;
+
+      --danger: #d92d20;
+      --warning: #f79009;
+
+      --text: #172b4d;
+      --text-secondary: #667085;
+      --text-light: #98a2b3;
+
+      --border: #e4e9f0;
+      --border-dark: #d0d5dd;
+
+      --background: #f5f8fc;
+      --white: #ffffff;
+
+      --shadow-sm:
+        0 2px 8px rgba(16, 24, 40, 0.05);
+
+      --shadow-md:
+        0 12px 35px rgba(16, 24, 40, 0.08);
+
+      --shadow-lg:
+        0 20px 55px rgba(16, 24, 40, 0.11);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+
+      background:
+        radial-gradient(
+          circle at 10% 0%,
+          rgba(23, 105, 224, 0.08),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 95% 10%,
+          rgba(25, 135, 84, 0.05),
+          transparent 25%
+        ),
+        var(--background);
+
+      font-family:
+        "Inter",
+        "Segoe UI",
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      color: var(--text);
+    }
+
+
+    /* =====================================================
+       TOPBAR
+       ===================================================== */
+
+    .topbar {
+      height: 76px;
+      width: 100%;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 0 48px;
+
+      background: rgba(255, 255, 255, 0.94);
+
+      border-bottom: 1px solid var(--border);
+
+      box-shadow:
+        0 3px 15px rgba(16, 24, 40, 0.05);
+
+      position: sticky;
+      top: 0;
+      z-index: 100;
+
+      backdrop-filter: blur(12px);
+    }
+
+    .marca {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .logo {
+      width: 43px;
+      height: 43px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 12px;
+
+      color: white;
+      font-size: 21px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #1d75ed,
+          #0d47a1
+        );
+
+      box-shadow:
+        0 7px 18px rgba(23, 105, 224, 0.24);
+    }
+
+    .marca-texto {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .marca-nome {
+      font-size: 18px;
+      line-height: 20px;
+
+      font-weight: 800;
+
+      letter-spacing: -0.5px;
+
+      color: #172b4d;
+    }
+
+    .marca-subtitulo {
+      margin-top: 2px;
+
+      font-size: 10px;
+
+      color: var(--text-secondary);
+
+      letter-spacing: 0.2px;
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+
+      padding: 8px 13px;
+
+      background: #f0faf6;
+
+      border: 1px solid #d7f0e5;
+
+      border-radius: 999px;
+
+      font-size: 12px;
+
+      font-weight: 600;
+
+      color: #16704e;
+    }
+
+    .status-ponto {
+      width: 8px;
+      height: 8px;
+
+      border-radius: 50%;
+
+      background: #20c997;
+
+      box-shadow:
+        0 0 0 4px rgba(32, 201, 151, 0.12);
+    }
+
+
+    /* =====================================================
+       PÁGINA
+       ===================================================== */
+
+    .pagina {
+      width: 100%;
+      max-width: 1060px;
+
+      margin: 0 auto;
+
+      padding: 42px 24px 50px;
+    }
+
+
+    /* =====================================================
+       CABEÇALHO
+       ===================================================== */
+
+    .cabecalho-pagina {
+      margin-bottom: 25px;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+
+      margin-bottom: 16px;
+
+      font-size: 12px;
+
+      color: var(--text-secondary);
+    }
+
+    .breadcrumb .separador {
+      color: #b0b8c4;
+    }
+
+    .breadcrumb span:last-child {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .titulo {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .titulo-icone {
+      width: 58px;
+      height: 58px;
+
+      flex-shrink: 0;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 15px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #edf5ff,
+          #e4efff
+        );
+
+      border: 1px solid #dceaff;
+
+      color: var(--primary);
+
+      font-size: 25px;
+
+      box-shadow:
+        0 7px 18px rgba(23, 105, 224, 0.08);
+    }
+
+    .titulo h1 {
+      font-size: 29px;
+      line-height: 34px;
+
+      font-weight: 800;
+
+      letter-spacing: -0.8px;
+
+      color: #172b4d;
+    }
+
+    .titulo p {
+      margin-top: 5px;
+
+      font-size: 13px;
+
+      color: var(--text-secondary);
+    }
+
+
+    /* =====================================================
+       CARD
+       ===================================================== */
+
+    .card {
+      overflow: hidden;
+
+      background: var(--white);
+
+      border: 1px solid #e3e8ef;
+
+      border-radius: 18px;
+
+      box-shadow: var(--shadow-lg);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 24px 30px;
+
+      background:
+        linear-gradient(
+          180deg,
+          #ffffff 0%,
+          #fbfcfe 100%
+        );
+
+      border-bottom: 1px solid #edf0f4;
+    }
+
+    .card-header-info h2 {
+      font-size: 16px;
+
+      font-weight: 750;
+
+      color: var(--text);
+    }
+
+    .card-header-info p {
+      margin-top: 5px;
+
+      font-size: 12px;
+
+      color: var(--text-secondary);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+
+      padding: 7px 11px;
+
+      border-radius: 999px;
+
+      background: #eef6ff;
+
+      border: 1px solid #dceaff;
+
+      color: var(--primary);
+
+      font-size: 11px;
+
+      font-weight: 700;
+    }
+
+    .badge::before {
+      content: "";
+
+      width: 6px;
+      height: 6px;
+
+      background: var(--primary);
+
+      border-radius: 50%;
+    }
+
+    .card-body {
+      padding: 30px;
+    }
+
+
+    /* =====================================================
+       AVISO
+       ===================================================== */
+
+    .aviso {
+      display: flex;
+      align-items: flex-start;
+      gap: 13px;
+
+      margin-bottom: 30px;
+
+      padding: 16px 18px;
+
+      border-radius: 12px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #fffaf0,
+          #fffdf8
+        );
+
+      border: 1px solid #f6dfaa;
+
+      color: #775b00;
+
+      font-size: 12px;
+
+      line-height: 1.6;
+    }
+
+    .aviso-icone {
+      width: 31px;
+      height: 31px;
+
+      flex-shrink: 0;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 9px;
+
+      background: #fff3cd;
+
+      font-size: 16px;
+    }
+
+    .aviso strong {
+      color: #664d03;
+
+      font-weight: 750;
+    }
+
+
+    /* =====================================================
+       GRID
+       ===================================================== */
+
+    .grid {
+      display: grid;
+
+      grid-template-columns:
+        1.6fr
+        1fr;
+
+      gap: 22px;
+    }
+
+    .campo {
+      margin-bottom: 23px;
+    }
+
+    .campo-full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+
+      margin-bottom: 8px;
+
+      color: #344054;
+
+      font-size: 12px;
+
+      font-weight: 750;
+    }
+
+    .obrigatorio {
+      color: var(--danger);
+      font-size: 14px;
+    }
+
+
+    /* =====================================================
+       INPUTS
+       ===================================================== */
+
+    input,
+    textarea {
+      width: 100%;
+
+      border: 1px solid var(--border-dark);
+
+      border-radius: 10px;
+
+      background: #ffffff;
+
+      color: var(--text);
+
+      font-family:
+        "Inter",
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+      font-size: 13px;
+
+      transition:
+        border-color .2s ease,
+        box-shadow .2s ease,
+        background .2s ease,
+        transform .2s ease;
+    }
+
+    input {
+      height: 49px;
+
+      padding: 0 14px;
+    }
+
+    textarea {
+      min-height: 200px;
+
+      padding: 14px;
+
+      resize: vertical;
+
+      line-height: 1.65;
+    }
+
+    input:hover,
+    textarea:hover {
+      border-color: #aeb8c6;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+
+      border-color: var(--primary);
+
+      background: #fff;
+
+      box-shadow:
+        0 0 0 4px
+        rgba(23, 105, 224, 0.10);
+    }
+
+    input[readonly] {
+      background:
+        linear-gradient(
+          180deg,
+          #f9fafc,
+          #f5f7fa
+        );
+
+      color: #475467;
+
+      cursor: default;
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .input-icon {
+      position: absolute;
+
+      right: 14px;
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      color: #98a2b3;
+
+      font-size: 15px;
+
+      pointer-events: none;
+    }
+
+    .campo-info {
+      margin-top: 7px;
+
+      color: #98a2b3;
+
+      font-size: 10px;
+
+      line-height: 1.5;
+    }
+
+
+    /* =====================================================
+       DOCUMENTO INFO
+       ===================================================== */
+
+    .documento-info {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+
+      margin-top: 2px;
+
+      padding: 15px 16px;
+
+      border-radius: 11px;
+
+      background: #f8fafc;
+
+      border: 1px dashed #d6dee8;
+
+      color: #667085;
+
+      font-size: 11px;
+
+      line-height: 1.55;
+    }
+
+    .documento-icone {
+      width: 30px;
+      height: 30px;
+
+      flex-shrink: 0;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 8px;
+
+      background: #edf4ff;
+
+      color: var(--primary);
+
+      font-size: 15px;
+    }
+
+    .documento-info strong {
+      color: #344054;
+    }
+
+
+    /* =====================================================
+       AÇÕES
+       ===================================================== */
+
+    .acoes {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 15px;
+
+      margin-top: 28px;
+      padding-top: 25px;
+
+      border-top: 1px solid #edf0f4;
+    }
+
+    .botoes {
+      display: flex;
+      gap: 10px;
+    }
+
+    button {
+      min-height: 44px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+
+      padding: 0 18px;
+
+      border-radius: 9px;
+
+      font-family:
+        "Inter",
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+      font-size: 12px;
+
+      font-weight: 750;
+
+      cursor: pointer;
+
+      transition:
+        transform .15s ease,
+        box-shadow .2s ease,
+        background .2s ease,
+        border-color .2s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    .btn-voltar {
+      color: #344054;
+
+      background: #ffffff;
+
+      border: 1px solid #d0d5dd;
+    }
+
+    .btn-voltar:hover {
+      background: #f8fafc;
+
+      border-color: #b8c0cc;
+
+      box-shadow:
+        0 3px 8px rgba(16, 24, 40, 0.06);
+    }
+
+    .btn-pdf {
+      min-width: 195px;
+
+      color: #ffffff;
+
+      background:
+        linear-gradient(
+          135deg,
+          #198754,
+          #147347
+        );
+
+      border: 1px solid #147347;
+
+      box-shadow:
+        0 7px 17px rgba(25, 135, 84, 0.20);
+    }
+
+    .btn-pdf:hover {
+      background:
+        linear-gradient(
+          135deg,
+          #157347,
+          #0f613d
+        );
+
+      box-shadow:
+        0 9px 22px rgba(25, 135, 84, 0.27);
+    }
+
+
+    /* =====================================================
+       RODAPÉ
+       ===================================================== */
+
+    .rodape {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+
+      margin-top: 24px;
+
+      color: #98a2b3;
+
+      font-size: 10px;
+    }
+
+    .rodape::before,
+    .rodape::after {
+      content: "";
+
+      width: 25px;
+      height: 1px;
+
+      background: #dfe4ea;
+    }
+
+
+    /* =====================================================
+       ANIMAÇÃO
+       ===================================================== */
+
+    .card {
+      animation:
+        aparecer .45s ease both;
+    }
+
+    @keyframes aparecer {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+
+    /* =====================================================
+       RESPONSIVO
+       ===================================================== */
+
+    @media (max-width: 760px) {
+
+      .topbar {
+        height: 68px;
+
+        padding: 0 18px;
+      }
+
+      .status {
+        display: none;
+      }
+
+      .pagina {
+        padding:
+          28px
+          14px
+          40px;
+      }
+
+      .titulo {
+        align-items: flex-start;
+      }
+
+      .titulo-icone {
+        width: 48px;
+        height: 48px;
+
+        border-radius: 12px;
+
+        font-size: 21px;
+      }
+
+      .titulo h1 {
+        font-size: 24px;
+        line-height: 29px;
+      }
+
+      .titulo p {
+        font-size: 12px;
+      }
+
+      .card {
+        border-radius: 14px;
+      }
+
+      .card-header {
+        padding: 20px;
+      }
+
+      .badge {
+        display: none;
+      }
+
+      .card-body {
+        padding: 20px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+
+        gap: 0;
+      }
+
+      .campo-full {
+        grid-column: auto;
+      }
+
+      .acoes {
+        flex-direction: column-reverse;
+
+        align-items: stretch;
+      }
+
+      .botoes {
+        width: 100%;
+      }
+
+      button {
+        width: 100%;
+      }
+
+      .btn-pdf {
+        width: 100%;
+      }
+    }
+
+
+    @media (max-width: 420px) {
+
+      .marca-subtitulo {
+        display: none;
+      }
+
+      .marca-nome {
+        font-size: 16px;
+      }
+
+      .logo {
+        width: 39px;
+        height: 39px;
+      }
+
+      .titulo h1 {
+        font-size: 22px;
+      }
+
+      .aviso {
+        padding: 13px;
+      }
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =====================================================
+       TOPO
+       ===================================================== -->
+
+  <header class="topbar">
+
+    <div class="marca">
+
+      <div class="logo">
+        🩺
+      </div>
+
+      <div class="marca-texto">
+
+        <div class="marca-nome">
+          SENTINELA
+        </div>
+
+        <div class="marca-subtitulo">
+          Sistema de Gestão em Saúde
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="status">
+
+      <span class="status-ponto"></span>
+
+      Sistema operacional
+
+    </div>
+
+  </header>
+
+
+
+  <!-- =====================================================
+       CONTEÚDO
+       ===================================================== -->
+
+  <main class="pagina">
+
+
+    <!-- CABEÇALHO -->
+
+    <div class="cabecalho-pagina">
+
+      <div class="breadcrumb">
+
+        <span>Atendimento</span>
+
+        <span class="separador">
+          /
+        </span>
+
+        <span>
+          Alta médica
+        </span>
+
+      </div>
+
+
+      <div class="titulo">
+
+        <div class="titulo-icone">
+          📄
+        </div>
+
+        <div>
+
+          <h1>
+            Alta Médica
+          </h1>
+
+          <p>
+            Emissão e registro do documento de alta do paciente
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         CARD PRINCIPAL
+         ===================================================== -->
+
+    <section class="card">
+
+
+      <!-- HEADER DO CARD -->
+
+      <div class="card-header">
+
+        <div class="card-header-info">
+
+          <h2>
+            Dados da alta
+          </h2>
+
+          <p>
+            Confira as informações antes de emitir o documento.
+          </p>
+
+        </div>
+
+
+        <div class="badge">
+          Documento de alta
+        </div>
+
+      </div>
+
+
+
+      <!-- BODY -->
+
+      <div class="card-body">
+
+
+        <!-- AVISO -->
+
+        <div class="aviso">
+
+          <div class="aviso-icone">
+            ⚠️
+          </div>
+
+          <div>
+
+            <strong>
+              Atenção antes da emissão
+            </strong>
+
+            <br>
+
+            Confira cuidadosamente os dados do paciente e
+            descreva o motivo da alta de forma clara e objetiva.
+            Após gerar o documento, o PDF será baixado
+            automaticamente.
+
+          </div>
+
+        </div>
+
+
+
+        <!-- CAMPOS -->
+
+        <div class="grid">
+
+
+          <!-- PACIENTE -->
+
+          <div class="campo">
+
+            <label for="paciente">
+              Paciente
+            </label>
+
+            <div class="input-wrapper">
+
+              <input
+                type="text"
+                id="paciente"
+                readonly
+              >
+
+              <span class="input-icon">
+                👤
+              </span>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- DATA -->
+
+          <div class="campo">
+
+            <label for="data">
+              Data da Alta
+            </label>
+
+            <div class="input-wrapper">
+
+              <input
+                type="text"
+                id="data"
+                readonly
+              >
+
+              <span class="input-icon">
+                📅
+              </span>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- MOTIVO -->
+
+          <div class="campo campo-full">
+
+            <label for="motivo">
+
+              Motivo da Alta
+
+              <span class="obrigatorio">
+                *
+              </span>
+
+            </label>
+
+            <textarea
+              id="motivo"
+              placeholder="Descreva o motivo da alta médica, orientações, condições do paciente e demais informações relevantes..."
+            ></textarea>
+
+            <div class="campo-info">
+
+              O conteúdo informado será incluído diretamente
+              no documento oficial de alta médica.
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+
+
+        <!-- DOCUMENTO -->
+
+        <div class="documento-info">
+
+          <div class="documento-icone">
+            📑
+          </div>
+
+          <div>
+
+            <strong>
+              Documento oficial
+            </strong>
+
+            <br>
+
+            O PDF será gerado com identificação do paciente,
+            data da alta, motivo informado e espaço destinado
+            à assinatura médica.
+
+          </div>
+
+        </div>
+
+
+
+        <!-- AÇÕES -->
+
+        <div class="acoes">
+
+
+          <button
+            class="btn-voltar"
+            onclick="voltar()"
+            type="button"
+          >
+
+            ←
+
+            Voltar ao painel
+
+          </button>
+
+
+          <div class="botoes">
+
+            <button
+              class="btn-pdf"
+              onclick="gerarPDF()"
+              type="button"
+            >
+
+              📄
+
+              Gerar e Baixar PDF
+
+            </button>
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+
+    <!-- RODAPÉ -->
+
+    <div class="rodape">
+
+      SENTINELA
+      <span>•</span>
+      Sistema de Gestão em Saúde
+
+    </div>
+
+
+  </main>
+
+
+
+  <!-- =====================================================
+       JAVASCRIPT
+       ===================================================== -->
+
+  <script>
+
+
+    /* =====================================================
+       PEGAR PACIENTE DA URL
+       ===================================================== */
+
+    const parametros =
+      new URLSearchParams(
+        window.location.search
+      );
+
+
+    const nomePaciente =
+      parametros.get("paciente");
+
+
+    if (
+      nomePaciente &&
+      nomePaciente.trim() !== ""
+    ) {
+
+      document.getElementById(
+        "paciente"
+      ).value =
+        nomePaciente;
+
+    } else {
+
+      document.getElementById(
+        "paciente"
+      ).value =
+        "Paciente não informado";
+
+    }
+
+
+
+    /* =====================================================
+       DATA ATUAL
+       ===================================================== */
+
+    const agora =
+      new Date();
+
+
+    const dataFormatada =
+      agora.toLocaleDateString(
+        "pt-BR"
+      );
+
+
+    document.getElementById(
+      "data"
+    ).value =
+      dataFormatada;
+
+
+
+    /* =====================================================
+       VOLTAR
+       ===================================================== */
+
+    function voltar() {
+
+      window.location.href =
+        "painel.html";
+
+    }
+
+
+
+    /* =====================================================
+       GERAR PDF
+       ===================================================== */
+
+    function gerarPDF() {
+
+
+      const paciente =
+        document.getElementById(
+          "paciente"
+        ).value;
+
+
+      const data =
+        document.getElementById(
+          "data"
+        ).value;
+
+
+      const motivo =
+        document.getElementById(
+          "motivo"
+        ).value.trim();
+
+
+
+      /* -----------------------------------------------------
+         VALIDAÇÃO
+         ----------------------------------------------------- */
+
+      if (!motivo) {
+
+        alert(
+          "⚠️ Digite o motivo da alta antes de gerar o PDF."
+        );
+
+        document.getElementById(
+          "motivo"
+        ).focus();
+
+        return;
+
+      }
+
+
+
+      /* -----------------------------------------------------
+         VERIFICAR BIBLIOTECA
+         ----------------------------------------------------- */
+
+      if (
+        !window.jspdf ||
+        !window.jspdf.jsPDF
+      ) {
+
+        alert(
+          "❌ Não foi possível carregar a biblioteca de PDF. Verifique sua conexão com a internet."
+        );
+
+        return;
+
+      }
+
+
+
+      /* -----------------------------------------------------
+         CRIAR PDF
+         ----------------------------------------------------- */
+
+      const {
+        jsPDF
+      } =
+        window.jspdf;
+
+
+      const doc =
+        new jsPDF({
+          orientation: "portrait",
+          unit: "mm",
+          format: "a4"
+        });
+
+
+
+      const largura =
+        doc.internal.pageSize.getWidth();
+
+
+      const altura =
+        doc.internal.pageSize.getHeight();
+
+
+
+      /* =====================================================
+         CORES DO PDF
+         ===================================================== */
+
+      const azul = [
+        23,
+        105,
+        224
+      ];
+
+      const azulEscuro = [
+        13,
+        71,
+        161
+      ];
+
+      const texto = [
+        23,
+        43,
+        77
+      ];
+
+      const cinza = [
+        102,
+        112,
+        133
+      ];
+
+      const verde = [
+        25,
+        135,
+        84
+      ];
+
+
+
+      /* =====================================================
+         CABEÇALHO AZUL
+         ===================================================== */
+
+      doc.setFillColor(
+        ...azul
+      );
+
+      doc.rect(
+        0,
+        0,
+        largura,
+        8,
+        "F"
+      );
+
+
+      /* =====================================================
+         MARCA
+         ===================================================== */
+
+      doc.setFont(
+        "helvetica",
+        "bold"
+      );
+
+      doc.setFontSize(
+        12
+      );
+
+      doc.setTextColor(
+        ...azulEscuro
+      );
+
+      doc.text(
+        "SENTINELA",
+        20,
+        23
+      );
+
+
+      doc.setFont(
+        "helvetica",
+        "normal"
+      );
+
+      doc.setFontSize(
+        8
+      );
+
+      doc.setTextColor(
+        ...cinza
+      );
+
+      doc.text(
+        "Sistema de Gestão em Saúde",
+        20,
+        29
+      );
+
+
+
+      /* =====================================================
+         TÍTULO
+         ===================================================== */
+
+      doc.setFont(
+        "helvetica",
+        "bold"
+      );
+
+      doc.setFontSize(
+        18
+      );
+
+      doc.setTextColor(
+        ...texto
+      );
+
+      doc.text(
+        "ALTA MÉDICA",
+        largura - 20,
+        24,
+        {
+          align: "right"
+        }
+      );
+
+
+      doc.setFont(
+        "helvetica",
+        "normal"
+      );
+
+      doc.setFontSize(
+        8
+      );
+
+      doc.setTextColor(
+        ...cinza
+      );
+
+      doc.text(
+        "Documento de alta do paciente",
+        largura - 20,
+        30,
+        {
+          align: "right"
+        }
+      );
+
+
+
+      /* =====================================================
+         LINHA
+         ===================================================== */
+
+      doc.setDrawColor(
+        220,
+        227,
+        236
+      );
+
+      doc.setLineWidth(
+        0.4
+      );
+
+      doc.line(
+        20,
+        38,
+        largura - 20,
+        38
+      );
+
+
+
+      /* =====================================================
+         BLOCO DE IDENTIFICAÇÃO
+         ===================================================== */
+
+      doc.setFillColor(
+        247,
+        249,
+        252
+      );
+
+      doc.roundedRect(
+        20,
+        47,
+        largura - 40,
+        31,
+        3,
+        3,
+        "F"
+      );
+
+
+      /* PACIENTE */
+
+      doc.setFont(
+        "helvetica",
+        "bold"
+      );
+
+      doc.setFontSize(
+        8
+      );
+
+      doc.setTextColor(
+        ...cinza
+      );
+
+      doc.text(
+        "PACIENTE",
+        27,
+        56
+      );
+
+
+      doc.setFont(
+        "helvetica",
+        "bold"
+      );
+
+      doc.setFontSize(
+        12
+      );
+
+      doc.setTextColor(
+        ...texto
+      );
+
+
+      const nomeLinhas =
+        doc.splitTextToSize(
+          paciente,
+          115
+        );
+
+
+      doc.text(
+        nomeLinhas,
+        27,
+        64
+      );
+
+
+      /* DATA */
+
+      doc.setFont(
+        "helvetica",
+        "bold"
+      );
+
+      doc.setFontSize(
+        8
+      );
+
+      doc.setTextColor(
+        ...cinza
+      );
+
+      doc.text(
+        "DATA DA ALTA",
+        150,
+        56
+      );
+
+
+      doc.setFont(
+        "helvetica",
+        "bold"
+      );
+
+      doc.setFontSize(
+        11
+      );
+
+      doc.setTextColor(
+        ...texto
+      );
+
+      doc.text(
+        data,
+        150,
+        64
+      );
+
+
+
+      /* =====================================================
+         TÍTULO MOTIVO
+         ===================================================== */
+
+      let posicao =
+        94;
+
+
+      doc.setFont(
+        "helvetica",
+        "bold"
+      );
+
+      doc.setFontSize(
+        11
+      );
+
+      doc.setTextColor(
+        ...texto
+      );
+
+      doc.text(
+        "Motivo da Alta",
+        20,
+        posicao
+      );
+
+
+      doc.setDrawColor(
+        ...azul
+      );
+
+      doc.setLineWidth(
+        0.7
+      );
+
+      doc.line(
+        20,
+        posicao + 5,
+        55,
+        posicao + 5
+      );
+
+
+
+      /* =====================================================
+         TEXTO DO MOTIVO
+         ===================================================== */
+
+      const motivoLinhas =
+        doc.splitTextToSize(
+          motivo,
+          largura - 40
+        );
+
+
+      doc.setFont(
+        "helvetica",
+        "normal"
+      );
+
+      doc.setFontSize(
+        10.5
+      );
+
+      doc.setTextColor(
+        55,
+        65,
+        81
+      );
+
+
+      const alturaLinha =
+        6.5;
+
+
+      let y =
+        posicao + 17;
+
+
+      let paginaAtual =
+        1;
+
+
+      motivoLinhas.forEach(
+        linha => {
+
+          if (
+            y >
+            altura - 55
+          ) {
+
+            doc.addPage();
+
+            paginaAtual++;
+
+            y = 30;
+
+          }
+
+
+          doc.text(
+            linha,
+            20,
+            y
+          );
+
+
+          y +=
+            alturaLinha;
+
+        }
+      );
+
+
+
+      /* =====================================================
+         ÁREA DE ASSINATURA
+         ===================================================== */
+
+      let posAssinatura =
+        y + 28;
+
+
+      if (
+        posAssinatura >
+        altura - 55
+      ) {
+
+        doc.addPage();
+
+        paginaAtual++;
+
+        posAssinatura =
+          65;
+
+      }
+
+
+      doc.setDrawColor(
+        90,
+        90,
+        90
+      );
+
+      doc.setLineWidth(
+        0.4
+      );
+
+      doc.line(
+        55,
+        posAssinatura,
+        155,
+        posAssinatura
+      );
+
+
+      doc.setFont(
+        "helvetica",
+        "bold"
+      );
+
+      doc.setFontSize(
+        9
+      );
+
+      doc.setTextColor(
+        ...texto
+      );
+
+      doc.text(
+        "Assinatura do Médico",
+        largura / 2,
+        posAssinatura + 7,
+        {
+          align: "center"
+        }
+      );
+
+
+      doc.setFont(
+        "helvetica",
+        "normal"
+      );
+
+      doc.setFontSize(
+        8
+      );
+
+      doc.setTextColor(
+        ...cinza
+      );
+
+      doc.text(
+        "Data e assinatura",
+        largura / 2,
+        posAssinatura + 12,
+        {
+          align: "center"
+        }
+      );
+
+
+
+      /* =====================================================
+         RODAPÉ EM TODAS AS PÁGINAS
+         ===================================================== */
+
+      const totalPaginas =
+        doc.internal.getNumberOfPages();
+
+
+      for (
+        let i = 1;
+        i <= totalPaginas;
+        i++
+      ) {
+
+        doc.setPage(i);
+
+
+        doc.setDrawColor(
+          224,
+          229,
+          236
+        );
+
+        doc.setLineWidth(
+          0.3
+        );
+
+        doc.line(
+          20,
+          altura - 22,
+          largura - 20,
+          altura - 22
+        );
+
+
+        doc.setFont(
+          "helvetica",
+          "normal"
+        );
+
+        doc.setFontSize(
+          7.5
+        );
+
+        doc.setTextColor(
+          ...cinza
+        );
+
+
+        doc.text(
+          "SENTINELA • Documento de alta médica",
+          20,
+          altura - 14
+        );
+
+
+        doc.text(
+          `Página ${i} de ${totalPaginas}`,
+          largura - 20,
+          altura - 14,
+          {
+            align: "right"
+          }
+        );
+
+      }
+
+
+
+      /* =====================================================
+         NOME DO ARQUIVO
+         ===================================================== */
+
+      let nomeArquivo =
+        paciente
+          .normalize("NFD")
+          .replace(
+            /[\u0300-\u036f]/g,
+            ""
+          )
+          .replace(
+            /[^a-zA-Z0-9 ]/g,
+            ""
+          )
+          .trim()
+          .replace(
+            /\s+/g,
+            "_"
+          );
+
+
+      if (!nomeArquivo) {
+
+        nomeArquivo =
+          "paciente";
+
+      }
+
+
+      nomeArquivo =
+        "alta_" +
+        nomeArquivo +
+        ".pdf";
+
+
+
+      /* =====================================================
+         DOWNLOAD
+         ===================================================== */
+
+      doc.save(
+        nomeArquivo
+      );
+
+    }
+
+  </script>
+
+</body>
+
+</html>

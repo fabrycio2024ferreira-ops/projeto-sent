@@ -1,0 +1,526 @@
+{
+  "usuarios": [
+    {
+      "usuario": "triagem",
+      "senha": "123",
+      "tipo": "triagem"
+    },
+    {
+      "usuario": "medico",
+      "senha": "123",
+      "tipo": "medico"
+    },
+    {
+      "usuario": "atendimento",
+      "senha": "123",
+      "tipo": "atendimento"
+    }
+  ],
+
+  "pacientes": [
+    {
+      "id": 1776857728699,
+      "nome": "Paciente não identificado",
+      "cpf": "",
+      "tipo": "Particular",
+      "status": "triagem",
+      "createdAt": "2026-04-22T11:35:28.699Z"
+    },
+    {
+      "id": 1776865888237,
+      "nome": "José Almeida",
+      "cpf": "0000000000000",
+      "tipo": "Particular",
+      "status": "triagem",
+      "createdAt": "2026-04-22T13:51:28.237Z"
+    },
+    {
+      "id": 1776868888454,
+      "nome": "Mariana Oliveira",
+      "cpf": "6546468844",
+      "tipo": "Particular",
+      "status": "triagem",
+      "createdAt": "2026-04-22T14:41:28.454Z"
+    },
+    {
+      "id": 1776871886695,
+      "nome": "Enzo Martins",
+      "cpf": "545343554",
+      "tipo": "Particular",
+      "status": "triagem",
+      "createdAt": "2026-04-22T15:31:26.695Z"
+    },
+    {
+      "id": 1777895890000,
+      "nome": "Carlos Eduardo Santos",
+      "cpf": "rgregregergerg",
+      "tipo": "Convenio",
+      "status": "triagem",
+      "createdAt": "2026-05-04T11:58:10.000Z"
+    },
+    {
+      "id": 1777895903949,
+      "nome": "Fernanda Costa",
+      "cpf": "45345435434353",
+      "tipo": "Particular",
+      "status": "triagem",
+      "createdAt": "2026-05-04T11:58:23.949Z"
+    },
+    {
+      "id": 1778767273416,
+      "nome": "Rafael Souza",
+      "cpf": "53434449.9.449",
+      "tipo": "Particular",
+      "status": "triagem",
+      "createdAt": "2026-05-14T14:01:13.416Z"
+    },
+    {
+      "id": 1778768219883,
+      "nome": "Lucas Ferreira",
+      "cpf": "3253545235",
+      "tipo": "Particular",
+      "status": "triagem",
+      "createdAt": "2026-05-14T14:16:59.883Z"
+    },
+    {
+      "id": 1778843781579,
+      "nome": "Adriana Ferreira",
+      "cpf": "45455435",
+      "tipo": "Particular",
+      "status": "triagem",
+      "createdAt": "2026-05-15T11:16:21.579Z"
+    },
+    {
+      "id": 1785931383386,
+      "nome": "José Carlos Pereira",
+      "cpf": "00000000000000",
+      "tipo": "Particular",
+      "status": "triagem",
+      "createdAt": "2026-08-05T12:03:03.386Z"
+    },
+    {
+      "id": 1785932227544,
+      "nome": "Patrícia Mendes",
+      "cpf": "13135444486484",
+      "tipo": "Convenio",
+      "status": "triagem",
+      "createdAt": "2026-08-05T12:17:07.545Z"
+    },
+    {
+      "id": 1785932410535,
+      "nome": "Débora Martins",
+      "cpf": "316464444",
+      "tipo": "Convenio",
+      "status": "triagem",
+      "createdAt": "2026-08-05T12:20:10.535Z"
+    },
+    {
+      "id": 1785932898427,
+      "nome": "Camila Rodrigues",
+      "cpf": "teste",
+      "tipo": "Convenio",
+      "status": "triagem",
+      "createdAt": "2026-08-05T12:28:18.427Z"
+    },
+    {
+      "id": 1785932936238,
+      "nome": "Gabriel Henrique Lima",
+      "cpf": "544545454545454",
+      "tipo": "Convenio",
+      "status": "triagem",
+      "createdAt": "2026-08-05T12:28:56.238Z"
+    },
+    {
+      "id": 1785938377866,
+      "nome": "Beatriz Almeida",
+      "cpf": "365353636338",
+      "tipo": "Convenio",
+      "status": "triagem",
+      "createdAt": "2026-08-05T13:59:37.866Z"
+    },
+    {
+      "id": 1785938528417,
+      "nome": "Rafael Souza",
+      "cpf": "46464641146464646",
+      "tipo": "Convenio",
+      "status": "triagem",
+      "createdAt": "2026-08-05T14:02:08.417Z"
+    }
+  ],
+
+  "triagens": [
+    {
+      "id": 1776170673545,
+      "nome": "Ricardo Mendes",
+      "sintoma": "Mal-estar geral",
+      "temperatura": 36.8,
+      "risco": "verde",
+      "alergia": "Nenhuma",
+      "observacao": "Paciente em bom estado geral.",
+      "status": "aguardando_medico"
+    },
+    {
+      "id": 1776857490380,
+      "nome": "Marcos Vinícius Silva",
+      "sintoma": "Dor abdominal",
+      "temperatura": 38.2,
+      "risco": "vermelho",
+      "alergia": "Nenhuma",
+      "observacao": "Dor de forte intensidade. Necessita avaliação médica.",
+      "status": "aguardando_medico"
+    },
+    {
+      "id": 1776857571101,
+      "nome": "Emily Rodrigues",
+      "sintoma": "Dor ocular intensa",
+      "temperatura": 39.0,
+      "risco": "vermelho",
+      "alergia": "Penicilina",
+      "observacao": "Paciente relata dor ocular associada à febre.",
+      "status": "aguardando_medico"
+    },
+    {
+      "id": 1776865942693,
+      "nome": "José Almeida",
+      "sintoma": "Dor ocular",
+      "temperatura": 40.0,
+      "risco": "vermelho",
+      "alergia": "Dipirona",
+      "observacao": "Febre elevada. Necessita avaliação médica prioritária.",
+      "status": "aguardando_medico"
+    },
+    {
+      "id": 1776868937414,
+      "nome": "Mariana Oliveira",
+      "sintoma": "Dor ocular intensa",
+      "temperatura": 38.7,
+      "risco": "vermelho",
+      "alergia": "Amoxicilina",
+      "observacao": "Paciente apresenta dor ocular e desconforto persistente.",
+      "status": "aguardando_medico"
+    },
+    {
+      "id": 1776871956701,
+      "nome": "Enzo Martins",
+      "sintoma": "Cefaleia intensa",
+      "temperatura": 38.5,
+      "risco": "vermelho",
+      "alergia": "Dipirona",
+      "observacao": "Relata dor de cabeça intensa associada à febre.",
+      "status": "aguardando_medico"
+    },
+    {
+      "id": 1777895934510,
+      "nome": "Carlos Eduardo Santos",
+      "sintoma": "Dor abdominal intensa",
+      "temperatura": 39.1,
+      "risco": "vermelho",
+      "alergia": "Ibuprofeno",
+      "observacao": "Paciente com dor abdominal e febre.",
+      "status": "aguardando_medico"
+    },
+    {
+      "id": 1778595086172,
+      "nome": "Lucas Ferreira",
+      "sintoma": "Mal-estar",
+      "temperatura": 36.9,
+      "risco": "verde",
+      "alergia": "Nenhuma",
+      "observacao": "Paciente estável, sem sinais de gravidade.",
+      "status": "aguardando_medico"
+    },
+    {
+      "id": 1778595396331,
+      "nome": "Camila Rodrigues",
+      "sintoma": "Crise de ansiedade",
+      "temperatura": 37.2,
+      "alergia": "Nenhuma",
+      "observacao": "Paciente relata palpitações e sensação de ansiedade.",
+      "risco": "vermelho",
+      "status": "aguardando_medico"
+    },
+    {
+      "id": 1778595502464,
+      "nome": "Gabriel Henrique Lima",
+      "sintoma": "Dor leve",
+      "temperatura": 37.0,
+      "alergia": "Nenhuma",
+      "observacao": "Sem sinais de alarme no momento.",
+      "risco": "amarelo",
+      "status": "aguardando_medico"
+    },
+    {
+      "id": 1778596152632,
+      "nome": "Fernanda Costa",
+      "sintoma": "Resfriado",
+      "temperatura": 38.1,
+      "alergia": "Nenhuma",
+      "observacao": "Tosse, congestão nasal e febre baixa.",
+      "risco": "vermelho",
+      "status": "aguardando_medico",
+      "createdAt": "2026-05-12T14:29:12.632Z"
+    },
+    {
+      "id": 1778674614881,
+      "nome": "Beatriz Almeida",
+      "sintoma": "Tontura",
+      "temperatura": 37.4,
+      "alergia": "Nenhuma",
+      "observacao": "Paciente relata episódio recente de tontura.",
+      "risco": "amarelo",
+      "status": "aguardando_medico",
+      "createdAt": "2026-05-13T12:16:54.881Z"
+    },
+    {
+      "id": 1778767334260,
+      "nome": "Rafael Souza",
+      "sintoma": "Sangramento",
+      "temperatura": 37.0,
+      "alergia": "Dipirona",
+      "observacao": "Paciente apresenta sangramento e necessita avaliação prioritária.",
+      "risco": "vermelho",
+      "status": "aguardando_medico",
+      "createdAt": "2026-05-14T14:02:14.260Z"
+    },
+    {
+      "id": 1778768250255,
+      "nome": "Patrícia Mendes",
+      "sintoma": "Dor torácica",
+      "temperatura": 37.0,
+      "alergia": "Nenhuma",
+      "observacao": "Relata desconforto torácico. Avaliação médica prioritária.",
+      "risco": "vermelho",
+      "status": "aguardando_medico",
+      "createdAt": "2026-05-14T14:17:30.255Z"
+    },
+    {
+      "id": 1778843835856,
+      "nome": "Adriana Ferreira",
+      "sintoma": "Sangramento",
+      "temperatura": 37.0,
+      "alergia": "Dipirona",
+      "observacao": "Paciente necessita avaliação médica.",
+      "risco": "vermelho",
+      "status": "aguardando_medico",
+      "createdAt": "2026-05-15T11:17:15.856Z"
+    },
+    {
+      "id": 1780405589261,
+      "nome": "Débora Martins",
+      "sintoma": "Dor intensa",
+      "temperatura": 39.0,
+      "alergia": "Nenhuma",
+      "observacao": "Febre associada à dor intensa.",
+      "risco": "vermelho",
+      "status": "aguardando_medico",
+      "createdAt": "2026-06-02T13:06:29.261Z"
+    },
+    {
+      "id": 1785931423000,
+      "nome": "José Carlos Pereira",
+      "sintoma": "Dor leve",
+      "temperatura": 38.5,
+      "alergia": "Nenhuma",
+      "observacao": "Paciente relata dor e febre.",
+      "risco": "vermelho",
+      "status": "aguardando_medico",
+      "createdAt": "2026-08-05T12:03:43.000Z"
+    },
+    {
+      "id": 1785938591417,
+      "nome": "Rafael Souza",
+      "sintoma": "Tosse persistente",
+      "temperatura": 39.2,
+      "alergia": "Nenhuma",
+      "observacao": "Tosse persistente associada à febre.",
+      "risco": "vermelho",
+      "status": "aguardando_medico",
+      "createdAt": "2026-08-05T14:03:11.417Z"
+    }
+  ],
+
+  "consultas": [
+    {
+      "id": 1776857474039,
+      "paciente": "Ricardo Mendes",
+      "diagnostico": "Avaliação clínica inicial",
+      "medicacao": "Nenhuma",
+      "obs": "Paciente avaliado em consulta.",
+      "createdAt": "2026-04-22T11:31:14.039Z"
+    },
+    {
+      "id": 1776857595380,
+      "paciente": "Emily Rodrigues",
+      "diagnostico": "Dor ocular associada a quadro febril",
+      "medicacao": "Analgésico",
+      "obs": "Orientado acompanhamento médico.",
+      "createdAt": "2026-04-22T11:33:15.380Z"
+    },
+    {
+      "id": 1776865995021,
+      "paciente": "José Almeida",
+      "diagnostico": "Quadro febril com dor ocular",
+      "medicacao": "Analgésico",
+      "obs": "Paciente orientado quanto aos sinais de alerta.",
+      "createdAt": "2026-04-22T13:53:15.021Z"
+    },
+    {
+      "id": 1776869011320,
+      "paciente": "Mariana Oliveira",
+      "diagnostico": "Dor ocular",
+      "medicacao": "Analgésico",
+      "obs": "Avaliação clínica realizada.",
+      "createdAt": "2026-04-22T14:43:31.320Z"
+    },
+    {
+      "id": 1776872012556,
+      "paciente": "Enzo Martins",
+      "diagnostico": "Cefaleia associada a quadro febril",
+      "medicacao": "Analgésico",
+      "obs": "Paciente orientado e liberado após avaliação.",
+      "createdAt": "2026-04-22T15:33:32.556Z"
+    },
+    {
+      "id": 1778767388545,
+      "paciente": "Rafael Souza",
+      "diagnostico": "Quadro de sangramento",
+      "medicacao": "Medicação sintomática",
+      "obs": "Paciente encaminhado para avaliação complementar.",
+      "createdAt": "2026-05-14T14:03:08.545Z"
+    },
+    {
+      "id": 1778768285274,
+      "paciente": "Patrícia Mendes",
+      "diagnostico": "Dor torácica",
+      "medicacao": "Medicação sintomática",
+      "obs": "Orientada avaliação complementar.",
+      "createdAt": "2026-05-14T14:18:05.274Z"
+    },
+    {
+      "id": 1778769363544,
+      "paciente": "Patrícia Mendes",
+      "diagnostico": "Reavaliação clínica",
+      "medicacao": "Nenhuma",
+      "obs": "Paciente reavaliado.",
+      "createdAt": "2026-05-14T14:36:03.544Z"
+    },
+    {
+      "id": 1780917834569,
+      "paciente": "Camila Rodrigues",
+      "diagnostico": "Crise de ansiedade",
+      "medicacao": "Medicação sintomática",
+      "obs": "Orientada e acompanhada durante atendimento.",
+      "createdAt": "2026-06-08T11:23:54.569Z"
+    },
+    {
+      "id": 1781007572717,
+      "paciente": "Paciente não identificado",
+      "diagnostico": "Avaliação inicial",
+      "medicacao": "Nenhuma",
+      "obs": "Registro incompleto.",
+      "createdAt": "2026-06-09T12:19:32.717Z"
+    },
+    {
+      "id": 1781007577323,
+      "paciente": "Paciente não identificado",
+      "diagnostico": "Avaliação inicial",
+      "medicacao": "Nenhuma",
+      "obs": "Registro incompleto.",
+      "createdAt": "2026-06-09T12:19:37.323Z"
+    },
+    {
+      "id": 1781007795864,
+      "paciente": "Adriana Ferreira",
+      "diagnostico": "Sangramento",
+      "medicacao": "Soro fisiológico",
+      "obs": "Paciente avaliada e orientada.",
+      "createdAt": "2026-06-09T12:23:15.864Z"
+    },
+    {
+      "id": 1781007896055,
+      "paciente": "Mariana Oliveira",
+      "diagnostico": "Dor ocular",
+      "medicacao": "Omeprazol",
+      "obs": "Paciente avaliada em consulta.",
+      "createdAt": "2026-06-09T12:24:56.055Z"
+    },
+    {
+      "id": 1781007993318,
+      "paciente": "Lucas Ferreira",
+      "diagnostico": "Mal-estar geral",
+      "medicacao": "Amoxicilina",
+      "obs": "Paciente orientado após avaliação.",
+      "createdAt": "2026-06-09T12:26:33.318Z"
+    },
+    {
+      "id": 1781009371706,
+      "paciente": "Emily Rodrigues",
+      "diagnostico": "Quadro febril",
+      "medicacao": "Amoxicilina",
+      "obs": "Paciente orientada quanto ao tratamento.",
+      "createdAt": "2026-06-09T12:49:31.706Z"
+    },
+    {
+      "id": 1781010710968,
+      "paciente": "Ricardo Mendes",
+      "diagnostico": "Mal-estar geral",
+      "medicacao": "Amoxicilina",
+      "obs": "Paciente orientado e liberado após avaliação.",
+      "createdAt": "2026-06-09T13:11:50.968Z"
+    },
+    {
+      "id": 1781016210683,
+      "paciente": "Emily Rodrigues",
+      "diagnostico": "Reavaliação clínica",
+      "medicacao": "Omeprazol",
+      "obs": "Paciente reavaliada.",
+      "createdAt": "2026-06-09T14:43:30.683Z"
+    }
+  ],
+
+  "tv_chamada": {
+    "id": "1786452864874",
+    "localTipo": "CONSULTÓRIO",
+    "localNumero": "01",
+    "paciente": "Ricardo Mendes",
+    "hora": "09:54"
+  },
+
+  "tv_historico": [
+    {
+      "id": "1786452864874",
+      "localTipo": "CONSULTÓRIO",
+      "localNumero": "01",
+      "paciente": "Ricardo Mendes",
+      "hora": "09:54"
+    },
+    {
+      "id": "1786449828531",
+      "localTipo": "CONSULTÓRIO",
+      "localNumero": "01",
+      "paciente": "Rafael Souza",
+      "hora": "09:03"
+    },
+    {
+      "id": "1786360380212",
+      "localTipo": "CONSULTÓRIO",
+      "localNumero": "01",
+      "paciente": "Camila Rodrigues",
+      "hora": "08:13"
+    },
+    {
+      "id": "1786100378594",
+      "localTipo": "CONSULTÓRIO",
+      "localNumero": "01",
+      "paciente": "Ricardo Mendes",
+      "hora": "07:59"
+    },
+    {
+      "id": "1785938628927",
+      "localTipo": "CONSULTÓRIO",
+      "localNumero": "01",
+      "paciente": "Rafael Souza",
+      "hora": "11:03"
+    }
+  ]
+}

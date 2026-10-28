@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Cadastro Simples </title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" style="text-decoration: none;
+        color: blue;
+        font-size: 14px; display: inline-block;
+        margin-bottom: 12px;">voltar para o login</a>
+        <h2>Cadastrar Usuário</h2>
+
+        <form id="formUsuario">
+            <input type="text" id="usuario" placeholder="Nome De usuario 
+            (login)" required>
+            <input type="password" id="senha" placeholder="Senha" required>
+
+        <select id="tipo" required>
+            <option value="">Selecione o Setor</option>
+             <option value="atendimento">atendimento</option>
+              <option value="triagem">triagem</option>
+               <option value="medico">medico</option>
+        </select>
+        <button type="submit">Cadastrar usuario</button>
+        </form>
+
+        <hr style="margin: 25px 0; border: none; border-top:
+        1px solid #ccc;">
+
+        <h3>Usuario Cadastrados</h3>
+        <div id="listausuarios"></div>
+    </div>
+    <script>
+       
+        //1. Cadastrar usuário ao enviar o formulário
+        document.getElementById("formUsuario").addEventListener("submit",
+            function(e) {
+                e.preventDefault();
+                const usuario= document.getElementById("usuario").value;
+                const senha = document.getElementById("senha").value;
+                const tipo = document.getElementById("tipo").value;
+
+                fetch("/usuarios", {
+                    method: "POST",
+                    headers: { "coontent-type": "application/json"},
+                    body:JSON.stringify({ usuario, senha, tipo })
+                })
+                .then(res => res.json())
+                .then(dados =>{
+                    if (dados.erro) {
+                    alert("Erro: " + dados.erro);
+                 } else {
+                    alert("Usuário cadastrado com sucesso!");
+                    document.getElementById("formUsuario").reset();
+                    carregarUsuarios();
+                }
+            });
+       });
+
+       function carregarUsuario() {
+        fetch("/usuarios")
+       }
+    </script>
+</body>
+</html>
